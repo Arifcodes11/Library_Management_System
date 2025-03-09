@@ -1,62 +1,89 @@
-# Library Management System 📚
+Here's the complete **README** file in a single, well-structured document with **input/output examples**, emojis, and clear instructions. 🚀📚  
 
-A simple **Java-based Library Management System** that allows users to **add, search, check out, and return books**. Book details are stored in a file (`library.txt`).
+---
 
-## Features ✨
-- **Add a Book**: Enter the title and author to add a book.
-- **Search for Books**: Find books by title or author (case insensitive).
-- **Check Out a Book**: Borrow a book if it is available.
-- **Return a Book**: Return a previously borrowed book.
-- **Persistent Storage**: Books are stored in `library.txt`.
+# 📚 Library Management System  
 
-## How to Run 🚀
-### 1️⃣ Install Java (if not already installed)
-- **Windows**: [Download Java](https://www.oracle.com/java/technologies/javase-jdk17-downloads.html) and install it.
-- **Linux/macOS**: Run the following command:
+A simple **Java-based Library Management System** that allows users to **add, search, borrow, and return books**. Book details are stored in a file (`library.txt`) for persistence.  
+
+## ✨ Features  
+- **📖 Add a Book** – Enter the title and author to add a book.  
+- **🔍 Search for Books** – Find books by title or author.  
+- **📚 Borrow a Book** – Check out a book if it's available.  
+- **🔄 Return a Book** – Return a borrowed book.  
+- **💾 Persistent Storage** – Books are saved in `library.txt` even after closing the program.  
+
+## 🚀 How to Run  
+
+### 1️⃣ Install Java (if not installed)  
+- **Windows**: [Download Java](https://www.oracle.com/java/technologies/javase-jdk17-downloads.html) and install it.  
+- **Linux/macOS**: Run:  
   ```sh
-  sudo apt install default-jdk  # Ubuntu/Debian
-  brew install openjdk          # macOS
+  sudo apt install default-jdk  # Ubuntu/Debian  
+  brew install openjdk          # macOS  
   ```
 
-### 2️⃣ Compile the Program
+### 2️⃣ Compile the Program  
 ```sh
 javac LibraryManagementSystem.java
 ```
 
-### 3️⃣ Run the Program
+### 3️⃣ Run the Program  
 ```sh
 java LibraryManagementSystem
 ```
 
-## File Storage 📂
-- Books are saved in **library.txt**.
-- Format: `Title, Author, CheckedOut(true/false)`.
-- Example:
+---
+
+## 📂 File Storage  
+- Books are saved in **library.txt** in the format:  
+  ```
+  Title, Author, CheckedOut(true/false)
+  ```
+- Example content:  
   ```
   The Great Gatsby,F. Scott Fitzgerald,false
   1984,George Orwell,true
   ```
 
-## Usage 🛠️
-When you run the program, you will see:
+---
+
+## 🛠️ Sample Input & Output  
+
 ```
 ----- Library Management System -----
 1. Add a book
 2. Search for books
-3. Check out a book
+3. Borrow a book
 4. Return a book
 0. Exit
-Enter your choice:
-```
-**Example Input & Output:**
-```
+Enter your choice: 1
+
+Enter the title of the book: Java Programming
+Enter the author of the book: John Doe
+✅ Book added successfully!
+
 Enter your choice: 2
-Enter the search keyword: 1984
-Search results:
-1984 by George Orwell [Checked Out]
+
+Enter the search keyword: Java
+🔎 Search results:
+📖 Java Programming by John Doe
+
+Enter your choice: 3
+
+Enter the title of the book to borrow: Java Programming
+📚 Book 'Java Programming' borrowed successfully!
+
+Enter your choice: 4
+
+Enter the title of the book to return: Java Programming
+🔄 Book 'Java Programming' returned successfully!
+
+Enter your choice: 0
+💾 Books saved to file: library.txt
+👋 Exiting... Goodbye!
 ```
 
+---
 
-
-Enjoy your Library Management System! 🎉
-
+🎉 **Enjoy your Library Management System!** 🚀
