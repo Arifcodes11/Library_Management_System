@@ -1,52 +1,52 @@
 import java.io.*;
 import java.util.*;
 
-class Book {
-    private String title;
-    private String author;
-    private boolean checkedOut;
+class BookItem {
+    private String bookTitle;
+    private String bookAuthor;
+    private boolean isBorrowed;
 
-    public Book(String title, String author) {
-        this.title = title;
-        this.author = author;
-        this.checkedOut = false;
+    public BookItem(String bookTitle, String bookAuthor) {
+        this.bookTitle = bookTitle;
+        this.bookAuthor = bookAuthor;
+        this.isBorrowed = false;
     }
 
-    public String getTitle() {
-        return title;
+    public String getBookTitle() {
+        return bookTitle;
     }
 
-    public String getAuthor() {
-        return author;
+    public String getBookAuthor() {
+        return bookAuthor;
     }
 
-    public boolean isCheckedOut() {
-        return checkedOut;
+    public boolean getIsBorrowed() {
+        return isBorrowed;
     }
 
-    public void setCheckedOut(boolean checkedOut) {
-        this.checkedOut = checkedOut;
+    public void setIsBorrowed(boolean isBorrowed) {
+        this.isBorrowed = isBorrowed;
     }
 }
 
-class Library {
-    private List<Book> books;
+class BookCollection {
+    private List<BookItem> bookList;
 
-    public Library() {
-        this.books = new ArrayList<>();
+    public BookCollection() {
+        this.bookList = new ArrayList<>();
     }
 
-    public void addBook(String title, String author) {
-        Book book = new Book(title, author);
-        books.add(book);
+    public void addNewBook(String bookTitle, String bookAuthor) {
+        BookItem book = new BookItem(bookTitle, bookAuthor);
+        bookList.add(book);
     }
 
-    public void searchBook(String keyword) {
-        List<Book> searchResults = new ArrayList<>();
+    public void findBook(String keyword) {
+        List<BookItem> searchResults = new ArrayList<>();
 
-        for (Book book : books) {
-            if (book.getTitle().toLowerCase().contains(keyword.toLowerCase()) ||
-                book.getAuthor().toLowerCase().contains(keyword.toLowerCase())) {
+        for (BookItem book : bookList) {
+            if (book.getBookTitle().toLowerCase().contains(keyword.toLowerCase()) ||
+                book.getBookAuthor().toLowerCase().contains(keyword.toLowerCase())) {
                 searchResults.add(book);
             }
         }
@@ -55,55 +55,55 @@ class Library {
             System.out.println("No books found matching the search keyword.");
         } else {
             System.out.println("Search results:");
-            for (Book book : searchResults) {
-                String status = book.isCheckedOut() ? "(Checked Out)" : "(Available)";
-                System.out.println(book.getTitle() + " by " + book.getAuthor() + " " + status);
+            for (BookItem book : searchResults) {
+                String status = book.getIsBorrowed() ? "(Checked Out)" : "(Available)";
+                System.out.println(book.getBookTitle() + " by " + book.getBookAuthor() + " " + status);
             }
         }
     }
 
-    public void checkoutBook(String title) {
-        for (Book book : books) {
-            if (book.getTitle().equalsIgnoreCase(title)) {
-                if (!book.isCheckedOut()) {
-                    book.setCheckedOut(true);
-                    System.out.println("Book '" + title + "' checked out successfully.");
+    public void borrowBook(String bookTitle) {
+        for (BookItem book : bookList) {
+            if (book.getBookTitle().equalsIgnoreCase(bookTitle)) {
+                if (!book.getIsBorrowed()) {
+                    book.setIsBorrowed(true);
+                    System.out.println("Book '" + bookTitle + "' checked out successfully.");
                 } else {
-                    System.out.println("Book '" + title + "' is already checked out.");
+                    System.out.println("Book '" + bookTitle + "' is already checked out.");
                 }
                 return;
             }
         }
-        System.out.println("Book '" + title + "' not found in the library.");
+        System.out.println("Book '" + bookTitle + "' not found in the collection.");
     }
 
-    public void returnBook(String title) {
-        for (Book book : books) {
-            if (book.getTitle().equalsIgnoreCase(title)) {
-                if (book.isCheckedOut()) {
-                    book.setCheckedOut(false);
-                    System.out.println("Book '" + title + "' returned successfully.");
+    public void returnBorrowedBook(String bookTitle) {
+        for (BookItem book : bookList) {
+            if (book.getBookTitle().equalsIgnoreCase(bookTitle)) {
+                if (book.getIsBorrowed()) {
+                    book.setIsBorrowed(false);
+                    System.out.println("Book '" + bookTitle + "' returned successfully.");
                 } else {
-                    System.out.println("Book '" + title + "' is not checked out.");
+                    System.out.println("Book '" + bookTitle + "' is not checked out.");
                 }
                 return;
             }
         }
-        System.out.println("Book '" + title + "' not found in the library.");
+        System.out.println("Book '" + bookTitle + "' not found in the collection.");
     }
 }
 
 public class LibraryManagementSystem {
     public static void main(String[] args) {
-        Library library = new Library();
+        BookCollection library = new BookCollection();
         Scanner scanner = new Scanner(System.in);
-        int choice;
+        int userChoice;
 
         do {
             System.out.println("\n----- Library Management System -----");
-            System.out.println("1. Add a book");
+            System.out.println("1. Add a new book");
             System.out.println("2. Search for books");
-            System.out.println("3. Check out a book");
+            System.out.println("3. Borrow a book");
             System.out.println("4. Return a book");
             System.out.println("0. Exit");
             System.out.print("Enter your choice: ");
@@ -112,32 +112,32 @@ public class LibraryManagementSystem {
                 System.out.println("Invalid input. Please enter a number.");
                 scanner.next();
             }
-            choice = scanner.nextInt();
+            userChoice = scanner.nextInt();
             scanner.nextLine(); 
 
-            switch (choice) {
+            switch (userChoice) {
                 case 1:
                     System.out.print("Enter the title of the book: ");
-                    String title = scanner.nextLine();
+                    String bookTitle = scanner.nextLine();
                     System.out.print("Enter the author of the book: ");
-                    String author = scanner.nextLine();
-                    library.addBook(title, author);
+                    String bookAuthor = scanner.nextLine();
+                    library.addNewBook(bookTitle, bookAuthor);
                     System.out.println("Book added successfully.");
                     break;
                 case 2:
                     System.out.print("Enter the search keyword: ");
                     String keyword = scanner.nextLine();
-                    library.searchBook(keyword);
+                    library.findBook(keyword);
                     break;
                 case 3:
-                    System.out.print("Enter the title of the book to check out: ");
-                    String checkoutTitle = scanner.nextLine();
-                    library.checkoutBook(checkoutTitle);
+                    System.out.print("Enter the title of the book to borrow: ");
+                    String borrowTitle = scanner.nextLine();
+                    library.borrowBook(borrowTitle);
                     break;
                 case 4:
                     System.out.print("Enter the title of the book to return: ");
                     String returnTitle = scanner.nextLine();
-                    library.returnBook(returnTitle);
+                    library.returnBorrowedBook(returnTitle);
                     break;
                 case 0:
                     System.out.println("Exiting Library Management System.");
@@ -145,7 +145,7 @@ public class LibraryManagementSystem {
                 default:
                     System.out.println("Invalid choice. Please try again.");
             }
-        } while (choice != 0);
+        } while (userChoice != 0);
 
         scanner.close();
     }
